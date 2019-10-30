@@ -1,0 +1,757 @@
+#InstallKeybdHook 
+#UseHook
+
+;;---------------------------------------;;
+;;                 目的                  ;;
+;;---------------------------------------;;
+
+;; windowsをmac風な操作にしたい.
+
+;;---------------------------------------;;
+;;                 概要                  ;;
+;;---------------------------------------;;
+
+;;【caps lock】  ->   【mac風control】
+;;【無変換】	 ->   【mac風command】(英変換)
+;;【変換】       ->   【mac風command】(かな変換)
+
+;;【windows】【ctrl】【alt】キーの一変更はほぼなし.
+
+;; 使えるショートカットキー
+;; control + Key(/fbpndhmk[j↑←↓→(tab)/)
+;; control + shift + Key(/(tab)/)
+;; command + Key(/a-z0-9.,(enter)(tab)(space)\/)
+;; command + shift + Key(/a-z0-9.,(enter)(tab)/)
+;; command1回  :(左command→英/左command→かな)
+;; command2連打:エクスプローラ起動
+
+;;---------------------------------------;;
+;;                 手順                  ;;
+;;---------------------------------------;;
+
+;; ① ChangeKeyをダウンロードする.次に【capslock】を【F13】に割り当てる.
+;; [参考] https://forest.watch.impress.co.jp/library/software/changekey/
+;; ② AutoHotkeyをダウンロードする.次に,このファイルの拡張子を.txtから.ahkに変更し実行する.
+;; [参考] https://www.autohotkey.com/
+;; ③ 確認のため,【無変換キー】+【\】を同時に押すとヘルプ画面が表示される.
+;; 文字化けのをしている場合:UTF-8(BOM付き)で保存してください.
+
+;;---------------------------------------;;
+;; CapsLockキーをMac風Controlキーにする. ;;
+;;---------------------------------------;;
+
+F13 & f::Send, {Blind}{Right} 	;; control + f ＝ →
+F13 & b::Send, {Blind}{Left} 	;; control + b ＝ ←
+F13 & p::Send, {Blind}{Up} 	;; control + p ＝ ↑
+F13 & n::Send, {Blind}{Down} 	;; control + n ＝ ↓
+F13 & a:: 	;; control + a ＝ 行頭へカーソルの移動
+    If GetKeyState("Shift", "P") {
+        send, +{Home}
+    } else {
+        send, {Home}
+    }
+    Return
+F13 & e:: 	;; control + e ＝ 行末へカーソルの移動
+    If GetKeyState("Shift", "P") {
+        send, +{End}
+    } else {
+        send, {End}
+    }
+    Return
+F13 & h::Send, {BS} 	;; control + h ＝ BackSpace
+F13 & d::Send, {Del} 	;; control + d ＝ Delete
+F13 & m::Send, {Enter} 	;; control + m ＝ Enter
+F13 & [::Send, {Esc} 	;; control + [ ＝ Escape
+F13 & k::Send, +{End}{Del} 	;; control + k ＝ 左削除
+F13 & j:: 	;; control + j ＝ 英変換
+    Send {F10}
+    IME_SET(0)
+    return
+F13 & tab:: 	;; control + tab ＝ タブスイッチャー
+    if GetKeyState("Shift", "P"){
+        Send,^+{Tab}
+    }else{
+        send ^{Tab} 
+    }
+    return
+F13 & Left::send, ^#{Left} 	;; control + ← ＝ デスクトップの移動
+F13 & Right::send, ^#{Right} 	;; control + → ＝ デスクトップの移動
+F13 & Up::send, #{Tab} 	;; control + ↑ ＝ mission control
+F13 & Down::MouseClick,Left 	;; control + ↓ ＝ 左クリック
+
+
+#Include C:\Users\minami\Downloads\IME.ahk
+
+;;---------------------------------------;;
+;;  無変換キーをmac風commandキーにする.  ;;
+;;---------------------------------------;;
+
+sc07B & a:: 	;; command(左) + a
+    if GetKeyState("Shift", "P"){
+        Send,^+{a}
+    }else{
+        send ^{a} 
+    }
+    return
+sc07B & b:: 	;; command(左) + b
+    if GetKeyState("Shift", "P"){
+        Send,^+{b}
+    }else{
+        send ^{b} 
+    }
+    return
+sc07B & c:: 	;; command(左) + c
+    if GetKeyState("Shift", "P"){
+        Send,^+{c}
+    }else{
+        send ^{c} 
+    }
+    return
+sc07B & d:: 	;; command(左) + d
+    if GetKeyState("Shift", "P"){
+        Send,^+{d}
+    }else{
+        send ^{d} 
+    }
+    return
+sc07B & e:: 	;; command(左) + e
+    if GetKeyState("Shift", "P"){
+        Send,^+{e}
+    }else{
+        send ^{e} 
+    }
+    return
+sc07B & f:: 	;; command(左) + f
+    if GetKeyState("Shift", "P"){
+        Send,^+{f}
+    }else{
+        send ^{f} 
+    }
+    return
+sc07B & g:: 	;; command(左) + g
+    if GetKeyState("Shift", "P"){
+        Send,^+{g}
+    }else{
+        send ^{g} 
+    }
+    return
+sc07B & h:: 	;; command(左) + h
+    if GetKeyState("Shift", "P"){
+        Send,^+{h}
+    }else{
+        send ^{h} 
+    }
+    return
+sc07B & i:: 	;; command(左) + i
+    if GetKeyState("Shift", "P"){
+        Send,^+{i}
+    }else{
+        send ^{i} 
+    }
+    return
+sc07B & j:: 	;; command(左) + j
+    if GetKeyState("Shift", "P"){
+        Send,^+{j}
+    }else{
+        send ^{j} 
+    }
+    return
+sc07B & k:: 	;; command(左) + k
+    if GetKeyState("Shift", "P"){
+        Send,^+{k}
+    }else{
+        send ^{k} 
+    }
+    return
+sc07B & l:: 	;; command(左) + l
+    if GetKeyState("Shift", "P"){
+        Send,^+{l}
+    }else{
+        send ^{l} 
+    }
+    return
+sc07B & m:: 	;; command(左) + m
+    if GetKeyState("Shift", "P"){
+        Send,^+{m}
+    }else{
+        send ^{m} 
+    }
+    return
+sc07B & n:: 	;; command(左) + n
+    if GetKeyState("Shift", "P"){
+        Send,^+{n}
+    }else{
+        send ^{n} 
+    }
+    return
+sc07B & o:: 	;; command(左) + o
+    if GetKeyState("Shift", "P"){
+        Send,^+{o}
+    }else{
+        send ^{o} 
+    }
+    return
+sc07B & p:: 	;; command(左) + p
+    if GetKeyState("Shift", "P"){
+        Send,^+{p}
+    }else{
+        send ^{p} 
+    }
+    return
+sc07B & q:: 	;; command(左) + q
+    if GetKeyState("Shift", "P"){
+        Send,^+{q}
+    }else{
+        send !{F4} 
+    }
+    return
+sc07B & r:: 	;; command(左) + r
+    if GetKeyState("Shift", "P"){
+        Send,^+{r}
+    }else{
+        send ^{r} 
+    }
+    return
+sc07B & s:: 	;; command(左) + s
+    if GetKeyState("Shift", "P"){
+        Send,^+{s}
+    }else{
+        send ^{s} 
+    }
+    return
+sc07B & t:: 	;; command(左) + t
+    if GetKeyState("Shift", "P"){
+        Send,^+{t}
+    }else{
+        send ^{t} 
+    }
+    return
+sc07B & u:: 	;; command(左) + u
+    if GetKeyState("Shift", "P"){
+        Send,^+{u}
+    }else{
+        send ^{u} 
+    }
+    return
+sc07B & v:: 	;; command(左) + v
+    if GetKeyState("Shift", "P"){
+        Send,^+{v}
+    }else{
+        send ^{v} 
+    }
+    return
+sc07B & w:: 	;; command(左) + w
+    if GetKeyState("Shift", "P"){
+        Send,^+{w}
+    }else{
+        send ^{w} 
+    }
+    return
+sc07B & x:: 	;; command(左) + x
+    if GetKeyState("Shift", "P"){
+        Send,^+{x}
+    }else{
+        send ^{x} 
+    }
+    return
+sc07B & y:: 	;; command(左) + y
+    if GetKeyState("Shift", "P"){
+        Send,^+{y}
+    }else{
+        send ^{y} 
+    }
+    return
+sc07B & z:: 	;; command(左) + z
+    if GetKeyState("Shift", "P"){
+        Send,^+{z}
+    }else{
+        send ^{z} 
+    }
+    return
+sc07B & 1:: 	;; command(左) + 1
+    if GetKeyState("Shift", "P"){
+        Send,^+{1}
+    }else{
+        send ^{2} 
+    }
+    return
+sc07B & 2:: 	;; command(左) + 2
+    if GetKeyState("Shift", "P"){
+        Send,^+{2}
+    }else{
+        send ^{2} 
+    }
+    return
+sc07B & 3:: 	;; command(左) + 3
+    if GetKeyState("Shift", "P"){
+        Send,^+{3}
+    }else{
+        send ^{3} 
+    }
+    return
+sc07B & 4:: 	;; command(左) + 4
+    if GetKeyState("Shift", "P"){
+        Send,^+{4}
+    }else{
+        send ^{z} 
+    }
+    return
+sc07B & 5:: 	;; command(左) + 5
+    if GetKeyState("Shift", "P"){
+        Send,^+{5}
+    }else{
+        send ^{5} 
+    }
+    return
+sc07B & 6:: 	;; command(左) + 6
+    if GetKeyState("Shift", "P"){
+        Send,^+{6}
+    }else{
+        send ^{6} 
+    }
+    return
+sc07B & 7:: 	;; command(左) + 7
+    if GetKeyState("Shift", "P"){
+        Send,^+{7}
+    }else{
+        send ^{7} 
+    }
+    return
+sc07B & 8:: 	;; command(左) + 8
+    if GetKeyState("Shift", "P"){
+        Send,^+{8}
+    }else{
+        send ^{8} 
+    }
+    return
+sc07B & 9:: 	;; command(左) + 9
+    if GetKeyState("Shift", "P"){
+        Send,^+{9}
+    }else{
+        send ^{9} 
+    }
+    return
+sc07B & 0:: 	;; command(左) + 0
+    if GetKeyState("Shift", "P"){
+        Send,^+{0}
+    }else{
+        send ^{0} 
+    }
+    return
+sc07B & .:: 	;; command(左) + .
+    if GetKeyState("Shift", "P"){
+        Send,^+{.}
+    }else{
+        send ^{.} 
+    }
+    return
+sc07B & ,:: 	;; command(左) + ,
+    if GetKeyState("Shift", "P"){
+        Send,^+{,}
+    }else{
+        send ^{,} 
+    }
+    return
+sc07B & Enter:: 	;; command(左) + Enter
+    if GetKeyState("Shift", "P"){
+        Send,^+{Enter}
+    }else{
+        send ^{Enter} 
+    }
+    return
+
+sc07B & tab:: 	;; command(右) + tab ＝ 画面スイッチャー
+    if GetKeyState("Shift", "P"){
+        Send,!+{Esc}
+    }else{
+        send !{Esc} 
+    }
+    return
+
+sc07B & Space::Send, #{s} 	;; command(左) + Space ＝ アプリランチャー
+
+
+
+sc07B up:: 	 	;; command(左) ＝ かな切り替え
+  IME_SET(0)
+return
+
+
+sc07B:: 	;; command(左)×2 ＝ エクスプローラー起動
+  if A_TickCount < %MuhenkanDouble%
+  {
+    send, #{e}
+    MuhenkanDouble = 0
+  }
+  else
+  {
+    MuhenkanDouble = %A_TickCount%
+    MuhenkanDouble += 200
+  }
+  KeyWait, sc07B
+return
+
+sc07B & \::ReadTextViewList("autohotkey.ahk", "MainScript", "^[^;][^:]+::", "\t;")	;; command(左) + \ = ヘルプ表示
+
+
+;;---------------------------------------;;
+;;   変換キーをmac風commandキーにする.   ;;
+;;---------------------------------------;;
+
+sc079 & a:: 	;; command(右) + a 
+    if GetKeyState("Shift", "P"){
+        Send,^+{a}
+    }else{
+        send ^{a} 
+    }
+    return
+sc079 & b:: 	;; command(右) + b
+    if GetKeyState("Shift", "P"){
+        Send,^+{b}
+    }else{
+        send ^{b} 
+    }
+    return
+sc079 & c:: 	;; command(右) + c
+    if GetKeyState("Shift", "P"){
+        Send,^+{c}
+    }else{
+        send ^{c} 
+    }
+    return
+sc079 & d:: 	;; command(右) + d
+    if GetKeyState("Shift", "P"){
+        Send,^+{d}
+    }else{
+        send ^{d} 
+    }
+    return
+sc079 & e:: 	;; command(右) + e
+    if GetKeyState("Shift", "P"){
+        Send,^+{e}
+    }else{
+        send ^{e} 
+    }
+    return
+sc079 & f:: 	;; command(右) + f
+    if GetKeyState("Shift", "P"){
+        Send,^+{f}
+    }else{
+        send ^{f} 
+    }
+    return
+sc079 & g:: 	;; command(右) + g
+    if GetKeyState("Shift", "P"){
+        Send,^+{g}
+    }else{
+        send ^{g} 
+    }
+    return
+sc079 & h:: 	;; command(右) + h
+    if GetKeyState("Shift", "P"){
+        Send,^+{h}
+    }else{
+        send ^{h} 
+    }
+    return
+sc079 & i:: 	;; command(右) + i
+    if GetKeyState("Shift", "P"){
+        Send,^+{i}
+    }else{
+        send ^{i} 
+    }
+    return
+sc079 & j:: 	;; command(右) + j
+    if GetKeyState("Shift", "P"){
+        Send,^+{j}
+    }else{
+        send ^{j} 
+    }
+    return
+sc079 & k:: 	;; command(右) + k
+    if GetKeyState("Shift", "P"){
+        Send,^+{k}
+    }else{
+        send ^{k} 
+    }
+    return
+sc079 & l:: 	;; command(右) + l
+    if GetKeyState("Shift", "P"){
+        Send,^+{l}
+    }else{
+        send ^{l} 
+    }
+    return
+sc079 & m:: 	;; command(右) + m
+    if GetKeyState("Shift", "P"){
+        Send,^+{m}
+    }else{
+        send ^{m} 
+    }
+    return
+sc079 & n:: 	;; command(右) + n
+    if GetKeyState("Shift", "P"){
+        Send,^+{n}
+    }else{
+        send ^{n} 
+    }
+    return
+sc079 & o:: 	;; command(右) + o
+    if GetKeyState("Shift", "P"){
+        Send,^+{o}
+    }else{
+        send ^{o} 
+    }
+    return
+sc079 & p:: 	;; command(右) + p
+    if GetKeyState("Shift", "P"){
+        Send,^+{p}
+    }else{
+        send ^{p} 
+    }
+    return
+sc079 & q:: 	;; command(右) + q
+    if GetKeyState("Shift", "P"){
+        Send,^+{q}
+    }else{
+        send !{F4} 
+    }
+    return
+sc079 & r:: 	;; command(右) + r
+    if GetKeyState("Shift", "P"){
+        Send,^+{r}
+    }else{
+        send ^{r} 
+    }
+    return
+sc079 & s:: 	;; command(右) + s
+    if GetKeyState("Shift", "P"){
+        Send,^+{s}
+    }else{
+        send ^{s} 
+    }
+    return
+sc079 & t:: 	;; command(右) + t
+    if GetKeyState("Shift", "P"){
+        Send,^+{t}
+    }else{
+        send ^{t} 
+    }
+    return
+sc079 & u:: 	;; command(右) + u
+    if GetKeyState("Shift", "P"){
+        Send,^+{u}
+    }else{
+        send ^{u} 
+    }
+    return
+sc079 & v:: 	;; command(右) + v
+    if GetKeyState("Shift", "P"){
+        Send,^+{v}
+    }else{
+        send ^{v} 
+    }
+    return
+sc079 & w:: 	;; command(右) + w
+    if GetKeyState("Shift", "P"){
+        Send,^+{w}
+    }else{
+        send ^{w} 
+    }
+    return
+sc079 & x:: 	;; command(右) + x
+    if GetKeyState("Shift", "P"){
+        Send,^+{x}
+    }else{
+        send ^{x} 
+    }
+    return
+sc079 & y:: 	;; command(右) + y
+    if GetKeyState("Shift", "P"){
+        Send,^+{y}
+    }else{
+        send ^{y} 
+    }
+    return
+sc079 & z:: 	;; command(右) + z
+    if GetKeyState("Shift", "P"){
+        Send,^+{z}
+    }else{
+        send ^{z} 
+    }
+    return
+sc079 & 1:: 	;; command(右) + 1
+    if GetKeyState("Shift", "P"){
+        Send,^+{1}
+    }else{
+        send ^{2} 
+    }
+    return
+sc079 & 2:: 	;; command(右) + 2
+    if GetKeyState("Shift", "P"){
+        Send,^+{2}
+    }else{
+        send ^{2} 
+    }
+    return
+sc079 & 3:: 	;; command(右) + 3
+    if GetKeyState("Shift", "P"){
+        Send,^+{3}
+    }else{
+        send ^{3} 
+    }
+    return
+sc079 & 4:: 	;; command(右) + 4
+    if GetKeyState("Shift", "P"){
+        Send,^+{4}
+    }else{
+        send ^{z} 
+    }
+    return
+sc079 & 5:: 	;; command(右) + 5
+    if GetKeyState("Shift", "P"){
+        Send,^+{5}
+    }else{
+        send ^{5} 
+    }
+    return
+sc079 & 6:: 	;; command(右) + 6
+    if GetKeyState("Shift", "P"){
+        Send,^+{6}
+    }else{
+        send ^{6} 
+    }
+    return
+sc079 & 7:: 	;; command(右) + 7
+    if GetKeyState("Shift", "P"){
+        Send,^+{7}
+    }else{
+        send ^{7} 
+    }
+    return
+sc079 & 8:: 	;; command(右) + 8
+    if GetKeyState("Shift", "P"){
+        Send,^+{8}
+    }else{
+        send ^{8} 
+    }
+    return
+sc079 & 9:: 	;; command(右) + 9
+    if GetKeyState("Shift", "P"){
+        Send,^+{9}
+    }else{
+        send ^{9} 
+    }
+    return
+sc079 & 0:: 	;; command(右) + 0
+    if GetKeyState("Shift", "P"){
+        Send,^+{0}
+    }else{
+        send ^{0} 
+    }
+    return
+sc079 & .:: 	;; command(右) + .
+    if GetKeyState("Shift", "P"){
+        Send,^+{.}
+    }else{
+        send ^{.} 
+    }
+    return
+sc079 & ,:: 	;; command(右) + ,
+    if GetKeyState("Shift", "P"){
+        Send,^+{,}
+    }else{
+        send ^{,} 
+    }
+    return
+sc079 & Enter:: 	;; command(右) + Enter
+    if GetKeyState("Shift", "P"){
+        Send,^+{Enter}
+    }else{
+        send ^{Enter} 
+    }
+    return
+
+
+sc079 & tab:: 	;; command(右) + tab ＝ 画面スイッチャー
+    if GetKeyState("Shift", "P"){
+        Send,!+{Esc}
+    }else{
+        send !{Esc} 
+    }
+    return
+
+
+sc079 & Space::Send, #{s} 	;; command(左) + Space ＝ アプリランチャー
+
+
+sc079:: 	;; command(右)×2 ＝ エクスプローラー起動
+  if A_TickCount < %HenkanDouble%
+  {
+    send, #{e}
+    HenkanDouble = 0
+  }
+  else
+  {
+    HenkanDouble = %A_TickCount%
+    HenkanDouble += 200
+  }
+  KeyWait, sc079
+return
+
+sc079 up:: 	 	;; command(右) ＝ 英切り替え
+  IME_SET(1)
+return
+
+
+sc079 & \::ReadTextViewList("autohotkey.ahk", "ショートカット一覧", "^[^;][^:]+::", "\t;")	;; command(右) + \ = ヘルプ表示
+
+
+ReadTextViewList(file_path, gui_title, r, str)
+{
+	static path
+	path := file_path
+
+	Gui, TextGui:New, , % "AutoHotKey"
+	Gui, TextGui:default
+	Gui, Font, s10, メイリオ
+	Gui, Add, ListView, Grid w300 h500, % "ショートカット一覧"
+
+	i = 0
+	Loop
+	{
+		i += 1
+		FileReadLine, line, %path%, %i%
+		if(ErrorLevel <> 0)
+		{
+			break
+		}
+		else
+		{
+			found_pos := RegExMatch(line, r)
+			line_set := RegExMatch(line, str)
+			line_txt := SubStr(line, line_set)
+		}
+		if found_pos
+		{
+			LV_Add("AutoHdr", line_txt)
+		}
+	}
+
+	Gui, Show
+	return
+TextGuiGuiEscape:
+TextGuiGuiClose:
+	GUI, Destroy
+	return
+}
+
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory
+
+
+
+^!R::Reload 	;; Ctrl + Alt + R ＝ スクリプトの再読込.
+^!E::Edit 	;; Ctrl + Alt + E ＝ スクリプトの編集.
+
+#Esc::Shutdown, 1　	;; Win + Esc ＝ シャットダウン
